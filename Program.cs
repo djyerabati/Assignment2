@@ -571,8 +571,18 @@ namespace Assignment2
         {
             try
             {
-                
-                return 0;
+                //max for profit
+                int max = 0;
+                //this is used for initializing min price of stock on that particular day.
+                int buy_stock = prices[0];
+                for (int i = 1; i < prices.Length; i++)
+                {
+                    //taking min of buy_stock and prices[i]
+                    buy_stock = Math.Min(buy_stock, prices[i]);
+                    //taking max of profit between earlier max and (prices[i] - buy_stock)
+                    max = Math.Max(max, (prices[i] - buy_stock));
+                }
+                return max;
             }
             catch (Exception)
             {
@@ -606,7 +616,26 @@ namespace Assignment2
         {
             try
             {
-                //write your code here.
+                int m = 1, n = 2;
+                int ways = 0;
+                //if steps==1, we will be having only 1 possible way to climb
+                if (steps == 1)
+                    Console.WriteLine(1);
+                //if steps==2, we will be having only 2 possible ways to climb
+                if (steps == 2)
+                    Console.WriteLine(2);
+                else
+                {
+                    //adding preceeding 2 elements will fetch the no. of possible ways
+                    for (int i = 2; i < steps; i++)
+                    {
+                        ways = m + n;
+                        m = n;
+                        n = ways;
+                    }
+                }
+                //printing no. of ways as output
+                Console.WriteLine(ways);
 
             }
             catch (Exception)
